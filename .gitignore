@@ -32,3 +32,8 @@
 /strings.json
 .DS_Store
 **/.DS_Store
+
+# Android 构建产物（签名密钥，含敏感信息，切勿提交）
+/android.json
+/android.keystore
+/bundle.keystore
