@@ -10751,7 +10751,9 @@ label L_eika_ind01:
     voice "a_eika_ind01_170.ogg"
     n4 "「大，大概……」"
     voice "b_eika_ind01_174.ogg"
-    n3 "[[1|涼|A_eika_ind01_171]「没反应呢」"
+    n3 "「没反应呢」"
+    voice "a_eika_ind01_171.ogg"
+    n4 "「没反应呢」"
     voice "b_eika_ind01_175.ogg"
     n3 "「是不是刺激再强一点比较好？」"
     voice "a_eika_ind01_172.ogg"
@@ -10979,8 +10981,7 @@ label L_eika_ind01:
     voice "b_eika_ind01_207.ogg"
     n3 "「是啊……早点回来就好了……」"
     show yo0003_lx598y599 as c42 at Transform(xanchor=0.5, yanchor=0.5, xpos=200, ypos=747)
-    voice "d_eika_ind01_013.ogg"
-    n6 "[[1|重耳|]「游戏？」"
+    n0 "「游戏？」"
     show yo0002_lx598y599 as c42 at Transform(xanchor=0.5, yanchor=0.5, xpos=200, ypos=747)
     voice "d_eika_ind01_014.ogg"
     n6 "「嗯，难得大家在一起当然要玩游戏了」"
@@ -17627,7 +17628,8 @@ label L_eika_ind12:
     n0 "「呀—」"
     jump L_eika_ind12_ero7
 label L_eika_ind12_ero7:
-    "[[1|詠歌|B_eika_ind12_031]「抱，抱歉……抱歉……我再也忍耐不住了……」"
+    voice "b_eika_ind12_031.ogg"
+    n3 "「抱，抱歉……抱歉……我再也忍耐不住了……」"
     n0 "「诶？　忍，忍耐？」"
     voice "b_eika_ind12_032.ogg"
     n3 "「我，我啊……已经忍耐到现在了，虽然知道做这种事是不行的……但是已经停不下来了……」"
@@ -32704,13 +32706,13 @@ label L_ry_ei_com03:
     n0 "「会，会下雨的吗？」"
     show ry0010x263y600 as c42 at Transform(xanchor=0.5, yanchor=0.5, xpos=200, ypos=508)
     voice "a_ry_ei_com03_007.ogg"
-    n4 "「还真是什么都没去了解啊……预计今天傍晚会开始下雨噢。降水概率60%，所以应该会下雨的」"
+    n4 "「还真是什么都没去了解啊……预计今天傍晚会开始下雨噢。降水概率60%%，所以应该会下雨的」"
     show ry0000x263y600 as c42 at Transform(xanchor=0.5, yanchor=0.5, xpos=200, ypos=508)
     show ry0004x263y600 as c42 at Transform(xanchor=0.5, yanchor=0.5, xpos=200, ypos=508)
     show ry0010x263y600 as c42 at Transform(xanchor=0.5, yanchor=0.5, xpos=200, ypos=508)
     n0 "「是这样啊……」"
     "没看天气预报，所以也没有带伞……。"
-    "降水概率60%的话，的确会有下雨的可能……而且预计概率这么高的情况下，一般都会下的。"
+    "降水概率60%%的话，的确会有下雨的可能……而且预计概率这么高的情况下，一般都会下的。"
     show ry0011dx271y616 as c42 at Transform(xanchor=0.5, yanchor=0.5, xpos=200, ypos=465)
     voice "a_ry_ei_com03_008.ogg"
     n4 "「还是说你想在阴天摄影么？  那样也行就是了……」"
@@ -34395,7 +34397,8 @@ label L_ry_ei_com04:
     n0 "「啊，不，没有什么不行噢」"
     show ei81006ax235y553 as c41 at Transform(xanchor=0.5, yanchor=0.5, xpos=400, ypos=473)
     voice "b_ry_ei_com04_030.ogg"
-    n3 "「哥哥，在撒谎……哥哥还真是老在撒谎啊……」 ikuyo[[1|重耳|]「呜……」"
+    n3 "「哥哥，在撒谎……哥哥还真是老在撒谎啊……」ikuyo"
+    n0 "「呜……」"
     voice "b_ry_ei_com04_031.ogg"
     n3 "「总之你就说说到底有什么不行的地方啊」"
     n0 "「那个……就是因为那个叠好了啊……啊，不，那个什么，所以说我都说了啊」"
@@ -36899,9 +36902,9 @@ label L_ry_ei_com08:
     voice "c_ry_ei_com08_051.ogg"
     n2 "「嗯，是啊」"
     menu:
-        "塺壧儖乕僩":
+        "詠歌路线":
             jump L_eika_ind01
-        "椓儖乕僩":
+        "涼路线":
             jump L_ryo_ind01
 label L_tane_ed:
     play music "bgm/bgm204.ogg"
@@ -52642,9 +52645,9 @@ label L_ta_tu_com05:
     n0 "「……………………」"
     "所以说，为什么会无精打采就不用我说了吧……"
     menu:
-        "堺儖乕僩":
+        "胤路线":
             jump L_tane_ind01
-        "朼儖乕僩":
+        "紡路线":
             jump L_tmg_ind01
 label L_tane_ed__dup2:
 label L_tmg_ed:

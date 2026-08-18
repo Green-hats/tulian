@@ -243,14 +243,15 @@ screen quick_menu():
             xalign 0.5
             yalign 1.0
 
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+            textbutton _("回退") action Rollback()
+            textbutton _("历史") action ShowMenu('history')
+            textbutton _("快进") action Skip() alternate Skip(fast=True, confirm=True)
+            textbutton _("跳跃") action Skip(fast=True)
+            textbutton _("自动") action Preference("auto-forward", "toggle")
+            textbutton _("存档") action ShowMenu('save')
+            textbutton _("快速存档") action QuickSave()
+            textbutton _("快速读档") action QuickLoad()
+            textbutton _("设置") action ShowMenu('preferences')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -291,37 +292,37 @@ screen navigation():
 
         if main_menu:
 
-            textbutton _("Start") action Start()
+            textbutton _("开始游戏") action Start()
 
         else:
 
-            textbutton _("History") action ShowMenu("history")
+            textbutton _("历史") action ShowMenu("history")
 
-            textbutton _("Save") action ShowMenu("save")
+            textbutton _("存档") action ShowMenu("save")
 
-        textbutton _("Load") action ShowMenu("load")
+        textbutton _("读档") action ShowMenu("load")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+        textbutton _("设置") action ShowMenu("preferences")
 
         if _in_replay:
 
-            textbutton _("End Replay") action EndReplay(confirm=True)
+            textbutton _("结束回放") action EndReplay(confirm=True)
 
         elif not main_menu:
 
-            textbutton _("Main Menu") action MainMenu()
+            textbutton _("返回主菜单") action MainMenu()
 
-        textbutton _("About") action ShowMenu("about")
+        textbutton _("关于") action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
+            textbutton _("帮助") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
             ## The quit button is banned on iOS and unnecessary on Android and Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+            textbutton _("退出") action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
@@ -464,7 +465,7 @@ screen game_menu(title, scroll=None):
 
     use navigation
 
-    textbutton _("Return"):
+    textbutton _("返回"):
         style "return_button"
 
         action Return()
@@ -541,20 +542,20 @@ screen about():
     ## This use statement includes the game_menu screen inside this one. The
     ## vbox child is then included inside the viewport inside the game_menu
     ## screen.
-    use game_menu(_("About"), scroll="viewport"):
+    use game_menu(_("关于"), scroll="viewport"):
 
         style_prefix "about"
 
         vbox:
 
             label "[config.name!t]"
-            text _("Version [config.version!t]\n")
+            text _("版本 [config.version!t]\n")
 
             ## gui.about is usually set in options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
 
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+            text _("由 {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only] 制作。\n\n[renpy.license!t]")
 
 
 
@@ -580,19 +581,19 @@ screen save():
 
     tag menu
 
-    use file_slots(_("Save"))
+    use file_slots(_("存档"))
 
 
 screen load():
 
     tag menu
 
-    use file_slots(_("Load"))
+    use file_slots(_("读档"))
 
 
 screen file_slots(title):
 
-    default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
+    default page_name_value = FilePageNameInputValue(pattern=_("第 {} 页"), auto=_("自动存档"), quick=_("快速存档"))
 
     use game_menu(title):
 
@@ -627,21 +628,35 @@ screen file_slots(title):
 
                     $ slot = i + 1
 
-                    button:
-                        id f"save_slot_{slot}"
-                        action FileAction(slot)
+                    fixed:
+                        xsize gui.slot_button_width
+                        ysize gui.slot_button_height
 
-                        has vbox
+                        button:
+                            id f"save_slot_{slot}"
+                            action FileAction(slot)
+                            xfill True
+                            yfill True
 
-                        add FileScreenshot(slot) xalign 0.5
+                            has vbox
 
-                        text FileTime(slot, format=_("{#file_time}%A, %B %d %Y, %H:%M"), empty=_("empty slot")):
-                            style "slot_time_text"
+                            add FileScreenshot(slot) xalign 0.5
 
-                        text FileSaveName(slot):
-                            style "slot_name_text"
+                            text FileTime(slot, format=_("{#file_time}%Y年%m月%d日 %H:%M"), empty=_("空存档位")):
+                                style "slot_time_text"
 
-                        key "save_delete" action FileDelete(slot)
+                            text FileSaveName(slot):
+                                style "slot_name_text"
+
+                            key "save_delete" action FileDelete(slot)
+
+                        button:
+                            style "slot_delete_button"
+                            action Confirm(_("确定删除这个存档吗？"), FileDelete(slot))
+                            sensitive FileLoadable(slot)
+                            xalign 1.0
+                            yalign 0.0
+                            text "×"
 
             ## Buttons to access other pages.
             hbox:
@@ -700,6 +715,24 @@ style slot_button:
 style slot_button_text:
     properties gui.text_properties("slot_button")
 
+style slot_delete_button is button
+style slot_delete_button_text is button_text
+
+style slot_delete_button:
+    xsize 24
+    ysize 24
+    background "#c04040"
+    hover_background "#e05050"
+    insensitive_background "#6060607f"
+    padding (0, 0)
+
+style slot_delete_button_text:
+    size 18
+    color "#ffffff"
+    xalign 0.5
+    yalign 0.5
+    insensitive_color "#aaaaaa"
+
 
 ## Preferences screen ##########################################################
 ##
@@ -712,7 +745,7 @@ screen preferences():
 
     tag menu
 
-    use game_menu(_("Preferences"), scroll="viewport"):
+    use game_menu(_("设置"), scroll="viewport"):
 
         vbox:
 
@@ -721,16 +754,16 @@ screen preferences():
 
                 vbox:
                     style_prefix "radio"
-                    label _("Display")
-                    textbutton _("Window") action Preference("display", "window")
-                    textbutton _("Fullscreen") action Preference("display", "fullscreen")
+                    label _("显示")
+                    textbutton _("窗口模式") action Preference("display", "window")
+                    textbutton _("全屏") action Preference("display", "fullscreen")
 
                 vbox:
                     style_prefix "check"
-                    label _("Skip")
-                    textbutton _("Unseen Text") action Preference("skip", "toggle")
-                    textbutton _("After Choices") action Preference("after choices", "toggle")
-                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+                    label _("快进")
+                    textbutton _("未读文本") action Preference("skip", "toggle")
+                    textbutton _("选项后") action Preference("after choices", "toggle")
+                    textbutton _("转场特效") action InvertSelected(Preference("transitions", "toggle"))
 
             null height (4 * gui.pref_spacing)
 
@@ -740,46 +773,46 @@ screen preferences():
 
                 vbox:
 
-                    label _("Text Speed")
+                    label _("文字速度")
 
                     bar value Preference("text speed")
 
-                    label _("Auto-Forward Time")
+                    label _("自动前进时间")
 
                     bar value Preference("auto-forward time")
 
                 vbox:
 
                     if config.has_music:
-                        label _("Music Volume")
+                        label _("音乐音量")
 
                         hbox:
                             bar value Preference("music volume")
 
                     if config.has_sound:
 
-                        label _("Sound Volume")
+                        label _("音效音量")
 
                         hbox:
                             bar value Preference("sound volume")
 
                             if config.sample_sound:
-                                textbutton _("Test") action Play("sound", config.sample_sound)
+                                textbutton _("试听") action Play("sound", config.sample_sound)
 
 
                     if config.has_voice:
-                        label _("Voice Volume")
+                        label _("语音音量")
 
                         hbox:
                             bar value Preference("voice volume")
 
                             if config.sample_voice:
-                                textbutton _("Test") action Play("voice", config.sample_voice)
+                                textbutton _("试听") action Play("voice", config.sample_voice)
 
                     if config.has_music or config.has_sound or config.has_voice:
                         null height gui.pref_spacing
 
-                        textbutton _("Mute All"):
+                        textbutton _("全部静音"):
                             action Preference("all mute", "toggle")
                             style "mute_all_button"
 
@@ -870,7 +903,7 @@ screen history():
     ## Avoid predicting this screen, as it can be very large.
     predict False
 
-    use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport")):
+    use game_menu(_("历史"), scroll=("vpgrid" if gui.history_height else "viewport")):
 
         style_prefix "history"
 
@@ -898,7 +931,7 @@ screen history():
                     substitute False
 
         if not _history_list:
-            label _("The dialogue history is empty.")
+            label _("对话历史为空。")
 
 define gui.history_allow_tags = { "alt", "noalt", "rt", "rb", "art" }
 
@@ -955,7 +988,7 @@ screen help():
 
     default device = "keyboard"
 
-    use game_menu(_("Help"), scroll="viewport"):
+    use game_menu(_("帮助"), scroll="viewport"):
 
         style_prefix "help"
 
@@ -964,11 +997,11 @@ screen help():
 
             hbox:
 
-                textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
-                textbutton _("Mouse") action SetScreenVariable("device", "mouse")
+                textbutton _("键盘") action SetScreenVariable("device", "keyboard")
+                textbutton _("鼠标") action SetScreenVariable("device", "mouse")
 
                 if GamepadExists():
-                    textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
+                    textbutton _("手柄") action SetScreenVariable("device", "gamepad")
 
             if device == "keyboard":
                 use keyboard_help
@@ -981,104 +1014,104 @@ screen help():
 screen keyboard_help():
 
     hbox:
-        label _("Enter")
-        text _("Advances dialogue and activates the interface.")
+        label _("回车键")
+        text _("推进对话并激活界面。")
 
     hbox:
-        label _("Space")
-        text _("Advances dialogue without selecting choices.")
+        label _("空格键")
+        text _("推进对话，但不选择选项。")
 
     hbox:
-        label _("Arrow Keys")
-        text _("Navigate the interface.")
+        label _("方向键")
+        text _("浏览界面。")
 
     hbox:
-        label _("Escape")
-        text _("Accesses the game menu.")
+        label _("Esc 键")
+        text _("打开游戏菜单。")
 
     hbox:
-        label _("Ctrl")
-        text _("Skips dialogue while held down.")
+        label _("Ctrl 键")
+        text _("按住时跳过对话。")
 
     hbox:
-        label _("Tab")
-        text _("Toggles dialogue skipping.")
+        label _("Tab 键")
+        text _("切换对话跳过模式。")
 
     hbox:
-        label _("Page Up")
-        text _("Rolls back to earlier dialogue.")
+        label _("Page Up 键")
+        text _("回滚到之前的对话。")
 
     hbox:
-        label _("Page Down")
-        text _("Rolls forward to later dialogue.")
+        label _("Page Down 键")
+        text _("前进到之后的对话。")
 
     hbox:
         label "H"
-        text _("Hides the user interface.")
+        text _("隐藏用户界面。")
 
     hbox:
         label "S"
-        text _("Takes a screenshot.")
+        text _("截图。")
 
     hbox:
         label "V"
-        text _("Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}.")
+        text _("切换 {a=https://www.renpy.org/l/voicing}语音朗读{/a} 辅助功能。")
 
     hbox:
         label "Shift+A"
-        text _("Opens the accessibility menu.")
+        text _("打开无障碍菜单。")
 
 
 screen mouse_help():
 
     hbox:
-        label _("Left Click")
-        text _("Advances dialogue and activates the interface.")
+        label _("鼠标左键")
+        text _("推进对话并激活界面。")
 
     hbox:
-        label _("Middle Click")
-        text _("Hides the user interface.")
+        label _("鼠标中键")
+        text _("隐藏用户界面。")
 
     hbox:
-        label _("Right Click")
-        text _("Accesses the game menu.")
+        label _("鼠标右键")
+        text _("打开游戏菜单。")
 
     hbox:
-        label _("Mouse Wheel Up")
-        text _("Rolls back to earlier dialogue.")
+        label _("鼠标滚轮上")
+        text _("回滚到之前的对话。")
 
     hbox:
-        label _("Mouse Wheel Down")
-        text _("Rolls forward to later dialogue.")
+        label _("鼠标滚轮下")
+        text _("前进到之后的对话。")
 
 
 screen gamepad_help():
 
     hbox:
-        label _("Right Trigger\nA/Bottom Button")
-        text _("Advances dialogue and activates the interface.")
+        label _("右扳机键\nA/下方按键")
+        text _("推进对话并激活界面。")
 
     hbox:
-        label _("Left Trigger\nLeft Shoulder")
-        text _("Rolls back to earlier dialogue.")
+        label _("左扳机键\n左肩键")
+        text _("回滚到之前的对话。")
 
     hbox:
-        label _("Right Shoulder")
-        text _("Rolls forward to later dialogue.")
+        label _("右肩键")
+        text _("前进到之后的对话。")
 
     hbox:
-        label _("D-Pad, Sticks")
-        text _("Navigate the interface.")
+        label _("方向键、摇杆")
+        text _("浏览界面。")
 
     hbox:
-        label _("Start, Guide")
-        text _("Accesses the game menu.")
+        label _("开始键、Guide 键")
+        text _("打开游戏菜单。")
 
     hbox:
-        label _("Y/Top Button")
-        text _("Hides the user interface.")
+        label _("Y/上方按键")
+        text _("隐藏用户界面。")
 
-    textbutton _("Calibrate") action GamepadCalibrate()
+    textbutton _("校准") action GamepadCalibrate()
 
 
 style help_button is gui_button
@@ -1143,8 +1176,8 @@ screen confirm(message, yes_action, no_action):
                 xalign 0.5
                 spacing 100
 
-                textbutton _("Yes") id "confirm_yes_button" action yes_action
-                textbutton _("No") id "confirm_no_button" action no_action
+                textbutton _("是") id "confirm_yes_button" action yes_action
+                textbutton _("否") id "confirm_no_button" action no_action
 
     ## Right-click and escape answer "no".
     key "game_menu" action no_action
@@ -1190,7 +1223,7 @@ screen skip_indicator():
         hbox:
             spacing 6
 
-            text _("Skipping")
+            text _("正在快进")
 
             text "▸" at delayed_blink(0.0, 1.0) style "skip_triangle"
             text "▸" at delayed_blink(0.2, 1.0) style "skip_triangle"
@@ -1408,10 +1441,10 @@ screen quick_menu():
         xalign 0.5
         yalign 1.0
 
-        textbutton _("Back") action Rollback()
-        textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-        textbutton _("Auto") action Preference("auto-forward", "toggle")
-        textbutton _("Menu") action ShowMenu()
+        textbutton _("回退") action Rollback()
+        textbutton _("快进") action Skip() alternate Skip(fast=True, confirm=True)
+        textbutton _("自动") action Preference("auto-forward", "toggle")
+        textbutton _("菜单") action ShowMenu()
 
 
 style window:

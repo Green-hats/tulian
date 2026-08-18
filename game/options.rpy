@@ -15,6 +15,10 @@ define config.name = _("突然之间发现我已恋上你")
 define gui.show_name = False
 
 
+## 默认界面语言（使用 tl/chinese 翻译覆盖内置英文界面）
+define config.language = "chinese"
+
+
 ## The version of the game.
 define config.version = "1.0"
 
@@ -33,6 +37,9 @@ define build.name = "tulian"
 define config.has_sound = True
 define config.has_music = True
 define config.has_voice = True
+
+## 语音文件放在 voice/ 子目录下，自动加上前缀。
+define config.voice_filename_format = "voice/{filename}"
 
 
 ## Transitions #################################################################

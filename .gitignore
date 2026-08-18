@@ -2,6 +2,12 @@
 /game/saves
 /game/cache
 
+# 游戏资源（体积大，不纳入 git，避免仓库膨胀）
+/game/images/
+/game/bgm/
+/game/voice/
+/game/se/
+
 # Compiled script files. These are important for saving, and so should
 # be preserved by developer and build systems after the game has been released.
 /game/**/*.rpyc
