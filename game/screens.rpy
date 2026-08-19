@@ -729,6 +729,22 @@ style slot_delete_button_text:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
 
+init python:
+    def pref_text_speed_ui():
+        v = _preferences.text_cps
+        if v <= 0:
+            return "瞬间"
+        return "{:.0f} 字/秒".format(v)
+
+    def pref_afm_time_ui():
+        v = _preferences.afm_time
+        if v <= 0:
+            return "无限"
+        return "{:.0f} 秒".format(v)
+
+    def pref_vol_ui(mixer):
+        return "{:.0f}%".format(_preferences.get_volume(mixer) * 100)
+
 screen preferences():
 
     tag menu
@@ -776,10 +792,14 @@ screen preferences():
                 null height gui.pref_spacing
 
                 label _("文字速度")
-                bar value Preference("text speed")
+                hbox:
+                    bar value Preference("text speed")
+                    text pref_text_speed_ui() style "pref_value"
 
                 label _("自动前进时间")
-                bar value Preference("auto-forward time")
+                hbox:
+                    bar value Preference("auto-forward time")
+                    text pref_afm_time_ui() style "pref_value"
 
             null height (2 * gui.pref_spacing)
 
@@ -795,20 +815,21 @@ screen preferences():
                     label _("音乐音量")
                     hbox:
                         bar value Preference("music volume")
+                        text pref_vol_ui("music") style "pref_value"
 
                 if config.has_sound:
                     label _("音效音量")
                     hbox:
-                        bar value Preference("sound volume")
-
+                        bar value Preference("sound volume") xsize 370
+                        text pref_vol_ui("sfx") style "pref_value"
                         if config.sample_sound:
                             textbutton _("试听") action Play("sound", config.sample_sound)
 
                 if config.has_voice:
                     label _("语音音量")
                     hbox:
-                        bar value Preference("voice volume")
-
+                        bar value Preference("voice volume") xsize 370
+                        text pref_vol_ui("voice") style "pref_value"
                         if config.sample_voice:
                             textbutton _("试听") action Play("voice", config.sample_voice)
 
@@ -877,7 +898,7 @@ style check_button_text:
     properties gui.text_properties("check_button")
 
 style slider_slider:
-    xsize 420
+    xsize 430
 
 style slider_button:
     properties gui.button_properties("slider_button")
@@ -889,6 +910,12 @@ style slider_button_text:
 
 style slider_vbox:
     xsize 500
+
+style pref_value:
+    color gui.idle_small_color
+    size gui.interface_text_size
+    xalign 1.0
+    xsize 70
 
 style pref_section:
     color gui.accent_color
