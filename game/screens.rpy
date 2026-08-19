@@ -294,8 +294,6 @@ screen navigation():
 
             textbutton _("开始游戏") action Start()
 
-            textbutton _("退出游戏") action Quit(confirm=False)
-
         else:
 
             textbutton _("存档") action ShowMenu("save")
@@ -315,6 +313,10 @@ screen navigation():
         elif not main_menu:
 
             textbutton _("返回主菜单") action MainMenu()
+
+        if main_menu:
+
+            textbutton _("退出游戏") action Quit(confirm=False)
 
 
 style navigation_button is gui_button
