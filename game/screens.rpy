@@ -294,6 +294,8 @@ screen navigation():
 
             textbutton _("开始游戏") action Start()
 
+            textbutton _("退出游戏") action Quit(confirm=False)
+
         else:
 
             textbutton _("存档") action ShowMenu("save")
@@ -302,7 +304,9 @@ screen navigation():
 
         textbutton _("设置") action ShowMenu("preferences")
 
-        textbutton _("关于") action ShowMenu("about")
+        if not main_menu:
+
+            textbutton _("关于") action ShowMenu("about")
 
         if _in_replay:
 
