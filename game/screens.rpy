@@ -353,8 +353,7 @@ screen main_menu():
     ## contents of the main menu are in the navigation screen.
     use navigation
 
-    add "gui/logo.png" xalign 0.5 yalign 0.0 yoffset 45
-
+    add "gui/logo.png" at logo_corner
     text "[config.version]" style "main_menu_version"
 
 
@@ -364,6 +363,11 @@ style main_menu_vbox is vbox
 style main_menu_text is gui_text
 style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
+
+transform logo_corner:
+    zoom 0.5
+    anchor (1.0, 1.0)
+    pos (800 - 20, 450 - 20)
 
 style main_menu_frame:
     xsize 220
