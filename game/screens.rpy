@@ -535,6 +535,7 @@ screen about():
         style_prefix "about"
 
         vbox:
+            xoffset 40
 
             label "[config.name!t]"
             text _("版本 [config.version!t]\n")
@@ -553,7 +554,10 @@ style about_label_text is gui_label_text
 style about_text is gui_text
 
 style about_label_text:
-    size gui.label_text_size
+    size 15
+
+style about_text:
+    size 15
 
 
 ## Load and Save screens #######################################################
