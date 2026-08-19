@@ -530,12 +530,13 @@ screen about():
     ## This use statement includes the game_menu screen inside this one. The
     ## vbox child is then included inside the viewport inside the game_menu
     ## screen.
-    use game_menu(_("关于"), scroll="viewport"):
+    use game_menu(_("关于")):
 
         style_prefix "about"
 
         vbox:
             xoffset 40
+            yfill True
             yalign 0.5
 
             label "[config.name!t]"
