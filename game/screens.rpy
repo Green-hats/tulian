@@ -738,7 +738,6 @@ style slot_delete_button:
     hover_background "#c0392baa"
     insensitive_background "#10101044"
     padding (0, 0)
-    foreground_outlines [ (1, "#ffffff33", 0, 0) ]
 
 style slot_delete_button_text:
     size 16
