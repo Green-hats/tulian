@@ -127,7 +127,7 @@ style window:
     xalign 0.5
     xfill True
     yalign gui.textbox_yalign
-    yoffset -10
+    yoffset -20
     ysize gui.textbox_height
 
     background Transform("gui/textbox.png", xalign=0.5, yalign=1.0, xzoom=0.8)
