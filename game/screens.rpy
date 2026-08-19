@@ -752,6 +752,7 @@ screen preferences():
     use game_menu(_("设置"), scroll="viewport"):
 
         vbox:
+            xoffset 40
 
             ## 显示 / 快进
             hbox:
@@ -788,7 +789,7 @@ screen preferences():
                 style_prefix "slider"
 
                 text _("文字") style "pref_section"
-                add "#f0609c40" xsize 500 ysize 1
+                add "#f0609c40" xsize 420 ysize 1
                 null height gui.pref_spacing
 
                 label _("文字速度")
@@ -808,7 +809,7 @@ screen preferences():
                 style_prefix "slider"
 
                 text _("声音") style "pref_section"
-                add "#f0609c40" xsize 500 ysize 1
+                add "#f0609c40" xsize 420 ysize 1
                 null height gui.pref_spacing
 
                 if config.has_music:
@@ -820,7 +821,7 @@ screen preferences():
                 if config.has_sound:
                     label _("音效音量")
                     hbox:
-                        bar value Preference("sound volume") xsize 370
+                        bar value Preference("sound volume") xmaximum 330
                         text pref_vol_ui("sfx") style "pref_value"
                         if config.sample_sound:
                             textbutton _("试听") action Play("sound", config.sample_sound)
@@ -828,7 +829,7 @@ screen preferences():
                 if config.has_voice:
                     label _("语音音量")
                     hbox:
-                        bar value Preference("voice volume") xsize 370
+                        bar value Preference("voice volume") xmaximum 330
                         text pref_vol_ui("voice") style "pref_value"
                         if config.sample_voice:
                             textbutton _("试听") action Play("voice", config.sample_voice)
@@ -873,6 +874,7 @@ style pref_label:
 
 style pref_label_text:
     yalign 1.0
+    size 16
 
 style pref_vbox:
     xsize 180
@@ -898,7 +900,7 @@ style check_button_text:
     properties gui.text_properties("check_button")
 
 style slider_slider:
-    xsize 430
+    xsize 330
 
 style slider_button:
     properties gui.button_properties("slider_button")
@@ -909,17 +911,17 @@ style slider_button_text:
     properties gui.text_properties("slider_button")
 
 style slider_vbox:
-    xsize 500
+    xsize 420
 
 style pref_value:
     color gui.idle_small_color
-    size gui.interface_text_size
+    size 15
     xalign 1.0
     xsize 70
 
 style pref_section:
     color gui.accent_color
-    size gui.label_text_size
+    size 17
     bottom_margin 2
 
 
