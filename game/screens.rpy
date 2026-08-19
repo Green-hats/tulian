@@ -353,6 +353,8 @@ screen main_menu():
     ## contents of the main menu are in the navigation screen.
     use navigation
 
+    add "gui/logo.png" xalign 0.5 yalign 0.0 yoffset 45
+
     text "[config.version]" style "main_menu_version"
 
 
