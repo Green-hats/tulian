@@ -30,6 +30,7 @@
 /dialogue.tab
 /dialogue.txt
 /strings.json
+/project.json
 .DS_Store
 **/.DS_Store
 
