@@ -69,7 +69,7 @@ define gui.interface_text_font = "default.ttf"
 define gui.text_size = 16
 
 ## The size of character names.
-define gui.name_text_size = 20
+define gui.name_text_size = 16
 
 ## The size of text in the game's user interface.
 define gui.interface_text_size = 18
@@ -105,18 +105,18 @@ define gui.textbox_yalign = 1.0
 
 
 ## The placement of the speaking character's name, relative to the textbox.
-define gui.name_xpos = 110
-define gui.name_ypos = -76
+define gui.name_xpos = 120
+define gui.name_ypos = -28
 
 ## The horizontal alignment of the character's name. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.
 define gui.name_xalign = 0.0
 
 ## The width, height, and borders of the box containing the character's name.
-define gui.namebox_width = 220
-define gui.namebox_height = None
+define gui.namebox_width = 171
+define gui.namebox_height = 28
 
-define gui.namebox_borders = Borders(5, 5, 5, 5)
+define gui.namebox_borders = Borders(5, 3, 5, 3)
 
 define gui.namebox_tile = False
 
@@ -329,7 +329,7 @@ init python:
 
         ## Adjust the location of the textbox.
         gui.textbox_height = 130
-        gui.name_xpos = 80
+        gui.name_xpos = 90
         gui.dialogue_xpos = 90
         gui.dialogue_width = 700
 
