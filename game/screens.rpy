@@ -536,6 +536,7 @@ screen about():
 
         vbox:
             xoffset 40
+            yalign 0.5
 
             label "[config.name!t]"
             text _("版本 [config.version!t]\n")
