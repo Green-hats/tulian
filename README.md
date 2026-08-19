@@ -42,62 +42,16 @@ renpy.exe C:\path\to\tulian
 
 ## 游戏资源拆包
 
-仓库仅包含代码与脚本，不含游戏素材。运行前需从原版游戏自行拆包以下四类资源并放入 `game/` 目录。
+仓库仅包含代码与脚本，不含游戏素材。运行前需从原版游戏（NScripter 引擎的 APK，资源打包在 `arc*.nsa` 归档中）自行拆包以下资源，放入 `game/` 对应目录：
 
-### 需要准备的资源
+| 资源 | 目标位置 | 数量 | 格式 |
+|------|----------|------|------|
+| 立绘/背景图 | `game/images/` | 7845 张 | `.png` |
+| 背景音乐 | `game/bgm/` | 34 首 | `.ogg` |
+| 角色语音 | `game/voice/` | 10699 条 | `.ogg` |
+| 音效 | `game/se/` | 600 个 | `.ogg` |
 
-| 资源 | 目标位置 | 数量 | 格式 | 说明 |
-|------|----------|------|------|------|
-| 立绘/背景图 | `game/images/` | 7845 张 | `.png` | 文件名形如 `av_tj0000ax1416y338.png`，编码了坐标信息 |
-| 背景音乐 | `game/bgm/` | 34 首 | `.ogg` | 文件名形如 `bgm001.ogg` |
-| 角色语音 | `game/voice/` | 10699 条 | `.ogg` | 文件名形如 `a_common00_001.ogg` |
-| 音效 | `game/se/` | 600 个 | `.ogg` | 文件名形如 `se_ambulance.ogg` |
-
-> 四类资源均为平铺目录（无子文件夹），直接放到 `game/` 下对应的同名目录即可。
-
-### 拆包步骤
-
-原版游戏是 NScripter 引擎的 Android 应用，资源打包在 `.nsa` 归档里：
-
-1. **提取 APK**：APK 本质是 zip 包。直接改后缀为 `.zip` 后解压（或用 `unzip` 命令），得到 `assets/` 目录。
-   ```bash
-   unzip 原版.apk -d apk_extracted/
-   ```
-   `assets/` 内应包含 NScripter 脚本 `0.txt` 与 `arc.nsa`、`arc1.nsa`、`arc2.nsa` … 系列归档文件。
-
-2. **解包 .nsa 归档**：使用 NScripter 社区解包工具 `nsaout`（或 `ns2`）依次解包每个 `arc*.nsa`：
-   ```bash
-   nsaout arc.nsa
-   nsaout arc1.nsa
-   nsaout arc2.nsa
-   # ...
-   ```
-   解包后得到 `image/`、`bgm/`、`voice/`、`se/` 四个目录（部分归档可能只含其中几类）。
-
-3. **放置资源**：把解包得到的四个目录整体拷贝/重命名到 `game/` 下：
-   ```bash
-   game/
-   ├── images/   # ← 来自 image/
-   ├── bgm/      # ← 来自 bgm/
-   ├── voice/    # ← 来自 voice/
-   └── se/       # ← 来自 se/
-   ```
-
-4. **重新生成脚本（可选）**：`script.rpy` 已由仓库附带，无需再次转换。但若你想从 `0.txt` 重新生成，先按需修改 `convert.py` 顶部硬编码的 `SRC`（`0.txt` 路径）与 `GAME_DIR`（`game` 目录路径），再运行：
-   ```bash
-   python3 convert.py
-   ```
-
-### 校验拆包是否完整
-
-完成后核对文件数量，与上表一致即说明拆包完整：
-
-```bash
-ls game/images/*.png | wc -l   # 期望 7845
-ls game/bgm/*.ogg    | wc -l   # 期望 34
-ls game/voice/*.ogg  | wc -l   # 期望 10699
-ls game/se/*.ogg     | wc -l   # 期望 600
-```
+> 解包用 NScripter 社区工具 `nsaout`，解包得到的 `image/`、`bgm/`、`voice/`、`se/` 目录整体放入 `game/` 下即可。
 
 ## 目录结构
 
