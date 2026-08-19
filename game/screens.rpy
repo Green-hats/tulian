@@ -874,7 +874,7 @@ style pref_label:
 
 style pref_label_text:
     yalign 1.0
-    size 16
+    size 15
 
 style pref_vbox:
     xsize 180
@@ -911,6 +911,7 @@ style slider_button:
 
 style slider_button_text:
     properties gui.text_properties("slider_button")
+    size 15
 
 style slider_vbox:
     xsize 420
