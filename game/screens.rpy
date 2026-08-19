@@ -296,8 +296,6 @@ screen navigation():
 
         else:
 
-            textbutton _("历史") action ShowMenu("history")
-
             textbutton _("存档") action ShowMenu("save")
 
         textbutton _("读档") action ShowMenu("load")
@@ -313,16 +311,6 @@ screen navigation():
             textbutton _("返回主菜单") action MainMenu()
 
         textbutton _("关于") action ShowMenu("about")
-
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
-
-            ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("帮助") action ShowMenu("help")
-
-        if renpy.variant("pc"):
-
-            ## The quit button is banned on iOS and unnecessary on Android and Web.
-            textbutton _("退出") action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
