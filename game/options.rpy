@@ -68,7 +68,7 @@ define config.window_hide_transition = Dissolve(.2)
 
 ## Preference defaults #########################################################
 
-default preferences.text_cps = 0
+default preferences.text_cps = 50
 
 default preferences.afm_time = 15
 

@@ -38,3 +38,8 @@
 /android.json
 /android.keystore
 /bundle.keystore
+
+# 编辑器本地配置
+/vscode/
+/.vscode/
+/game/.vscode/

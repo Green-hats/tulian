@@ -749,72 +749,87 @@ screen preferences():
 
         vbox:
 
+            ## 显示 / 快进
             hbox:
                 box_wrap True
+                spacing 24
 
                 vbox:
                     style_prefix "radio"
-                    label _("显示")
+                    xsize 200
+
+                    text _("显示") style "pref_section"
+                    add "#f0609c40" xsize 200 ysize 1
+                    null height gui.pref_spacing
+
                     textbutton _("窗口模式") action Preference("display", "window")
                     textbutton _("全屏") action Preference("display", "fullscreen")
 
                 vbox:
                     style_prefix "check"
-                    label _("快进")
+                    xsize 200
+
+                    text _("快进") style "pref_section"
+                    add "#f0609c40" xsize 200 ysize 1
+                    null height gui.pref_spacing
+
                     textbutton _("未读文本") action Preference("skip", "toggle")
                     textbutton _("选项后") action Preference("after choices", "toggle")
                     textbutton _("转场特效") action InvertSelected(Preference("transitions", "toggle"))
 
-            null height (4 * gui.pref_spacing)
+            null height (2 * gui.pref_spacing)
 
-            hbox:
+            ## 文字
+            vbox:
                 style_prefix "slider"
-                box_wrap True
 
-                vbox:
+                text _("文字") style "pref_section"
+                add "#f0609c40" xsize 500 ysize 1
+                null height gui.pref_spacing
 
-                    label _("文字速度")
+                label _("文字速度")
+                bar value Preference("text speed")
 
-                    bar value Preference("text speed")
+                label _("自动前进时间")
+                bar value Preference("auto-forward time")
 
-                    label _("自动前进时间")
+            null height (2 * gui.pref_spacing)
 
-                    bar value Preference("auto-forward time")
+            ## 声音
+            vbox:
+                style_prefix "slider"
 
-                vbox:
+                text _("声音") style "pref_section"
+                add "#f0609c40" xsize 500 ysize 1
+                null height gui.pref_spacing
 
-                    if config.has_music:
-                        label _("音乐音量")
+                if config.has_music:
+                    label _("音乐音量")
+                    hbox:
+                        bar value Preference("music volume")
 
-                        hbox:
-                            bar value Preference("music volume")
+                if config.has_sound:
+                    label _("音效音量")
+                    hbox:
+                        bar value Preference("sound volume")
 
-                    if config.has_sound:
+                        if config.sample_sound:
+                            textbutton _("试听") action Play("sound", config.sample_sound)
 
-                        label _("音效音量")
+                if config.has_voice:
+                    label _("语音音量")
+                    hbox:
+                        bar value Preference("voice volume")
 
-                        hbox:
-                            bar value Preference("sound volume")
+                        if config.sample_voice:
+                            textbutton _("试听") action Play("voice", config.sample_voice)
 
-                            if config.sample_sound:
-                                textbutton _("试听") action Play("sound", config.sample_sound)
+                if config.has_music or config.has_sound or config.has_voice:
+                    null height gui.pref_spacing
 
-
-                    if config.has_voice:
-                        label _("语音音量")
-
-                        hbox:
-                            bar value Preference("voice volume")
-
-                            if config.sample_voice:
-                                textbutton _("试听") action Play("voice", config.sample_voice)
-
-                    if config.has_music or config.has_sound or config.has_voice:
-                        null height gui.pref_spacing
-
-                        textbutton _("全部静音"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
+                    textbutton _("全部静音"):
+                        action Preference("all mute", "toggle")
+                        style "mute_all_button"
 
 
 style pref_label is gui_label
@@ -874,7 +889,7 @@ style check_button_text:
     properties gui.text_properties("check_button")
 
 style slider_slider:
-    xsize 260
+    xsize 420
 
 style slider_button:
     properties gui.button_properties("slider_button")
@@ -885,7 +900,12 @@ style slider_button_text:
     properties gui.text_properties("slider_button")
 
 style slider_vbox:
-    xsize 320
+    xsize 500
+
+style pref_section:
+    color gui.accent_color
+    size gui.label_text_size
+    bottom_margin 2
 
 
 ## History screen ##############################################################
