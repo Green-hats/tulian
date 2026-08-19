@@ -40,6 +40,14 @@ renpy.exe C:\path\to\tulian
 > 若提示找不到 `renpy.sh`，请用 SDK 目录下的完整路径，例如 macOS 为
 > `/Applications/renpy-8.5.x-sdk/renpy.sh`。
 
+## 下载
+
+已打包好的完整版本（内置全部游戏资源，免拆包）可通过网盘获取：
+
+- **中国移动云盘**（测试版）：<https://yun.139.com/shareweb/#/w/i/2wFGyLNaa9cbs>　提取码：`5hnx`
+
+> 该版本已打包图片、音乐、语音等资源，直接运行即可，无需按下方步骤手动拆包。
+
 ## 游戏资源拆包
 
 仓库仅包含代码与脚本，不含游戏素材。运行前需从原版游戏自行拆包以下资源，放入 `game/` 对应目录：
