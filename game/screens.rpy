@@ -538,15 +538,16 @@ screen about():
             xoffset 40
             yfill True
             yalign 0.5
+            spacing 6
 
             label "[config.name!t]"
-            text _("版本 [config.version!t]\n")
+            text _("版本 [config.version!t]")
 
             ## gui.about is usually set in options.rpy.
             if gui.about:
-                text "[gui.about!t]\n"
+                text "[gui.about!t]"
 
-            text _("由 {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only] 制作。\n\n[renpy.license!t]")
+            text _("由 {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only] 制作。\n[renpy.license!t]")
 
 
 
@@ -560,6 +561,7 @@ style about_label_text:
 
 style about_text:
     size 15
+    line_spacing -2
 
 
 ## Load and Save screens #######################################################
