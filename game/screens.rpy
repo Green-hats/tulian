@@ -1258,12 +1258,14 @@ style confirm_frame:
 style confirm_prompt_text:
     textalign 0.5
     layout "subtitle"
+    size 15
 
 style confirm_button:
     properties gui.button_properties("confirm_button")
 
 style confirm_button_text:
     properties gui.text_properties("confirm_button")
+    size 15
 
 
 ## Skip indicator screen #######################################################
