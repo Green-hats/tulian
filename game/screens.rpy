@@ -601,8 +601,6 @@ screen load():
 
 screen file_slots(title):
 
-    default page_name_value = FilePageNameInputValue(pattern=_("第 {} 页"), auto=_("自动存档"), quick=_("快速存档"))
-
     use game_menu(title):
 
         fixed:
@@ -610,18 +608,6 @@ screen file_slots(title):
             ## This ensures the input will get the enter event before any of the
             ## buttons do.
             order_reverse True
-
-            ## The page name, which can be edited by clicking on a button.
-            button:
-                style "page_label"
-
-                key_events True
-                xalign 0.5
-                action page_name_value.Toggle()
-
-                input:
-                    style "page_label_text"
-                    value page_name_value
 
             ## The grid of file slots.
             grid gui.file_slot_cols gui.file_slot_rows:
@@ -676,7 +662,6 @@ screen file_slots(title):
 
                 xalign 0.5
                 yalign 1.0
-                yoffset -14
 
                 spacing gui.page_spacing
 
