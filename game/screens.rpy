@@ -302,6 +302,8 @@ screen navigation():
 
         textbutton _("设置") action ShowMenu("preferences")
 
+        textbutton _("关于") action ShowMenu("about")
+
         if _in_replay:
 
             textbutton _("结束回放") action EndReplay(confirm=True)
@@ -309,8 +311,6 @@ screen navigation():
         elif not main_menu:
 
             textbutton _("返回主菜单") action MainMenu()
-
-        textbutton _("关于") action ShowMenu("about")
 
 
 style navigation_button is gui_button
