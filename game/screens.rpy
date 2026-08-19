@@ -653,12 +653,12 @@ screen file_slots(title):
                             text FileTime(slot, format=_("{#file_time}%Y年%m月%d日 %H:%M"), empty=_("空存档位")):
                                 style "slot_time_text"
                                 xalign 0.5
-                                ypos config.thumbnail_height
+                                ypos config.thumbnail_height - 2
 
                             text FileSaveName(slot):
                                 style "slot_name_text"
                                 xalign 0.5
-                                ypos config.thumbnail_height + 13
+                                ypos config.thumbnail_height + 11
 
                             key "save_delete" action FileDelete(slot)
 
@@ -720,7 +720,7 @@ style page_button:
 
 style page_button_text:
     properties gui.text_properties("page_button")
-    size 15
+    size 13
 
 style slot_button:
     properties gui.button_properties("slot_button")
