@@ -66,7 +66,7 @@ define gui.name_text_font = "default.ttf"
 define gui.interface_text_font = "default.ttf"
 
 ## The size of normal dialogue text.
-define gui.text_size = 18
+define gui.text_size = 16
 
 ## The size of character names.
 define gui.name_text_size = 20
@@ -122,11 +122,11 @@ define gui.namebox_tile = False
 
 
 ## The placement of dialogue relative to the textbox.
-define gui.dialogue_xpos = 168
+define gui.dialogue_xpos = 141
 define gui.dialogue_ypos = 28
 
 ## The maximum width of dialogue text, in pixels.
-define gui.dialogue_width = 580
+define gui.dialogue_width = 518
 
 ## The horizontal alignment of the dialogue text.
 define gui.dialogue_text_xalign = 0.0
