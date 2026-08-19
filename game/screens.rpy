@@ -676,6 +676,7 @@ screen file_slots(title):
 
                 xalign 0.5
                 yalign 1.0
+                yoffset -14
 
                 spacing gui.page_spacing
 
