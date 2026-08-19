@@ -188,13 +188,13 @@ define gui.choice_button_text_hover_color = "#ffffff"
 
 define gui.slot_button_width = 165
 define gui.slot_button_height = 105
-define gui.slot_button_borders = Borders(10, 10, 10, 10)
+define gui.slot_button_borders = Borders(10, 4, 10, 4)
 define gui.slot_button_text_size = 12
 define gui.slot_button_text_xalign = 0.5
 define gui.slot_button_text_idle_color = gui.idle_small_color
 
 define config.thumbnail_width = 145
-define config.thumbnail_height = 82
+define config.thumbnail_height = 70
 
 define gui.file_slot_cols = 2
 define gui.file_slot_rows = 3
