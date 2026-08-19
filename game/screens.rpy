@@ -365,9 +365,9 @@ style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
 
 transform logo_corner:
-    zoom 0.5
+    zoom 0.7
     anchor (1.0, 1.0)
-    pos (800 - 20, 450 - 60)
+    pos (800 - 20, 450 - 40)
 
 style main_menu_frame:
     xsize 220
