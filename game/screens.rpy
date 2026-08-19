@@ -732,19 +732,23 @@ style slot_delete_button is button
 style slot_delete_button_text is button_text
 
 style slot_delete_button:
-    xsize 24
-    ysize 24
-    background "#c04040"
-    hover_background "#e05050"
-    insensitive_background "#6060607f"
+    xsize 22
+    ysize 22
+    background "#00000055"
+    hover_background "#c0392baa"
+    insensitive_background "#10101044"
     padding (0, 0)
+    border (1, 1, 1, 1)
+    outline_scrollbars False
+    foreground_outlines [ (1, "#ffffff33", 0, 0) ]
 
 style slot_delete_button_text:
-    size 18
-    color "#ffffff"
+    size 16
+    color "#ffffffcc"
+    hover_color "#ffffff"
+    insensitive_color "#88888888"
     xalign 0.5
     yalign 0.5
-    insensitive_color "#aaaaaa"
 
 
 ## Preferences screen ##########################################################
