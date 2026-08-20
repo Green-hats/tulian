@@ -1,6 +1,6 @@
-# 突然之间发现我已恋上你（Ren'Py 移植版）
+# Ikikoi（突然之间发现我已恋上你 · Ren'Py 移植版）
 
-视觉小说《突然之间发现我已恋上你》的 Ren'Py 重制版，由原 NScripter 脚本自动转换而来。
+视觉小说《突然之间发现我已恋上你》（Ikikoi）的 Ren'Py 重制版，由原 NScripter 脚本自动转换而来。
 
 ## 项目简介
 
@@ -23,7 +23,7 @@
 
 1. **安装 Ren'Py**：从 [renpy.org](https://www.renpy.org/) 下载并安装 Ren'Py SDK（8.5 或更高版本）。
 2. **准备游戏资源**：仓库不含图片、音乐、语音等资源文件（已 git 忽略，约 2.8GB），需先按下方「游戏资源拆包」章节自行拆包，把 `images/`、`bgm/`、`voice/`、`se/` 四个目录放入 `game/` 下。
-3. **打开项目**：启动 Ren'Py 启动器（Launcher），在「preferences」里把「项目目录」指向本仓库根目录 `tulian/`，回到主界面后即可看到项目「突然之间发现我已恋上你」，点击「启动项目」（Launch Project）。
+3. **打开项目**：启动 Ren'Py 启动器（Launcher），在「preferences」里把「项目目录」指向本仓库根目录 `tulian/`，回到主界面后即可看到项目「Ikikoi」，点击「启动项目」（Launch Project）。
 
 > 首次打开会编译脚本（生成 `.rpyc`），属正常现象。
 
