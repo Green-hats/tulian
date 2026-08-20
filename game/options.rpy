@@ -24,7 +24,7 @@ define config.version = "1.0"
 
 
 ## Text that is placed on the game's about screen.
-define gui.about = _("突然之间发现我已恋上你\n\nNScripter 脚本转 Ren'Py 移植版")
+define gui.about = _("突然之间发现我已恋上你\n\nNScripter 脚本转 Ren'Py 移植版\n\n翻译来自 KDays 汉化组\n\n本移植版仅供学习研究用途，游戏原作版权归原作者所有。\n如有侵权，请联系作者，相关内容将立即删除。")
 
 
 ## A short name for the game used for executables and directories in the built
@@ -80,7 +80,7 @@ define config.save_directory = "tulian-ikikoi"
 
 ## Icon ########################################################################
 
-define config.window_icon = "gui/window_icon.png"
+define config.window_icon = "gui/ikikoi.ico"
 
 
 ## Build configuration #########################################################
