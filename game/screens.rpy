@@ -303,6 +303,10 @@ screen navigation():
 
         textbutton _("设置") action ShowMenu("preferences")
 
+        if main_menu:
+
+            textbutton _("剧情鉴赏") action ShowMenu("gallery")
+
         if not main_menu:
 
             textbutton _("关于") action ShowMenu("about")
@@ -765,7 +769,7 @@ screen preferences():
     use game_menu(_("设置"), scroll="viewport"):
 
         vbox:
-            xoffset 40
+            xoffset 55
 
             ## 显示 / 快进
             hbox:

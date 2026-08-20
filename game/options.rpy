@@ -96,9 +96,10 @@ init python:
     build.classify('**/thumbs.db', None)
 
     ## To archive files, classify them as 'archive'.
-
-    # build.classify('game/**.png', 'archive')
-    # build.classify('game/**.jpg', 'archive')
+    ## 图片/音频体积大，归档后可大幅减少散文件数量，加快安装与读取。
+    build.classify('game/**.png', 'archive')
+    build.classify('game/**.jpg', 'archive')
+    build.classify('game/**.ogg', 'archive')
 
     ## Files matching documentation patterns are duplicated in a mac app build,
     ## so they appear in both the app and the zip file.
