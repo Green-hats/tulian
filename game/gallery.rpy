@@ -62,7 +62,8 @@ screen gallery():
             # 角色选择 banner
             frame:
                 style "gallery_banner"
-                xalign 0.5
+                xpos (0.0 if renpy.variant("small") else 0.5)
+                xanchor (0.0 if renpy.variant("small") else 0.5)
                 ypos 10
 
                 hbox:
@@ -79,13 +80,19 @@ screen gallery():
                     if rname == g_route:
                         cur = scenes
                         break
+                if renpy.variant("small"):
+                    gcols = 2
+                    gthumb = Transform(xysize=(142, 78), align=(0.5, 0.5))
+                else:
+                    gcols = 3
+                    gthumb = Transform(xysize=(124, 70), align=(0.5, 0.5))
 
             # 场景封面网格（仿存档位，点击即播放）
             viewport:
                 xalign 0.5
-                xoffset 55
+                xoffset (0 if renpy.variant("small") else 55)
                 ypos 72
-                xsize 520
+                xsize (404 if renpy.variant("small") else 520)
                 ysize 320
                 scrollbars "vertical"
                 mousewheel True
@@ -94,12 +101,12 @@ screen gallery():
                 vbox:
                     spacing 7
 
-                    for k in range(0, len(cur), 3):
+                    for k in range(0, len(cur), gcols):
 
                         hbox:
                             spacing 8
 
-                            for cover, cnum, lab in cur[k:k+3]:
+                            for cover, cnum, lab in cur[k:k+gcols]:
 
                                 button:
                                     style "gallery_slot_button"
@@ -107,7 +114,7 @@ screen gallery():
 
                                     has fixed
 
-                                    add cover at fit_gallery_thumb
+                                    add cover at gthumb
 
                                     text ("第%d场" % cnum):
                                         style "gallery_slot_text"
@@ -115,19 +122,14 @@ screen gallery():
                                         yalign 1.0
 
 
-transform fit_gallery_thumb:
-    xysize (124, 70)
-    align (0.5, 0.5)
-
-
 style gallery_banner:
-    xsize 420
+    xsize None
     background "#00000066"
     padding (8, 5)
 
 style gallery_banner_button:
-    xsize 70
-    ysize 22
+    xsize 58
+    ysize 20
     background "#22222288"
     hover_background "#f0609c88"
     selected_background "#f0609c"
@@ -135,15 +137,15 @@ style gallery_banner_button:
 style gallery_banner_button_text:
     xalign 0.5
     yalign 0.5
-    size 15
+    size 13
     color "#ffffff"
     hover_color "#ffffff"
     selected_color "#ffffff"
 
 style gallery_slot_button:
-    xsize 132
-    ysize 80
-    padding (4, 5)
+    xsize 150
+    ysize 86
+    padding (4, 4)
     xfill False
     yfill False
 
@@ -152,3 +154,35 @@ style gallery_slot_text:
     color "#ffffff"
     yoffset -4
     outlines [ (2, "#00000088", 0, 0) ]
+
+
+## 小屏/触屏（安卓手机等）适配：宽触控按钮、2 列封面网格
+style gallery_banner:
+    variant "small"
+    xsize None
+    padding (6, 4)
+
+style gallery_banner_button:
+    variant "small"
+    xsize 76
+    ysize 38
+    background "#22222288"
+    hover_background "#f0609c88"
+    selected_background "#f0609c"
+
+style gallery_banner_button_text:
+    variant "small"
+    size 15
+
+style gallery_slot_button:
+    variant "small"
+    xsize 150
+    ysize 86
+    padding (4, 4)
+    xfill False
+    yfill False
+
+style gallery_slot_text:
+    variant "small"
+    size 13
+    yoffset -4

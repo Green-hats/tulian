@@ -34,6 +34,9 @@ translate chinese strings:
     old "Are you sure you want to skip to the next choice?"
     new "确定要跳到下一个选项吗？"
 
+    old "Are you sure you want to skip unseen dialogue to the next choice?"
+    new "确定要跳过未读内容到下一个选项吗？"
+
     # 快速存档/读档
     old "Quick save complete."
     new "快速存档完成。"

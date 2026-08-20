@@ -22229,7 +22229,6 @@ label L_ryo_ind03:
     "「所谓的かなめ石，是一个诅咒噢。不可见，不可闻，不可言……」"
     voice "a_ryo_ind03_001.ogg"
     n0 "「是，是谁！」"
-    n4 "lspsr 41,\"imagey5005_lx395y801.png\",400,801"
     "「汤川涼噢……果然如爷爷所说是个野孩子呢……」"
     show tj2004_lx419y651 as c41 at Transform(xanchor=0.5, yanchor=0.5, xpos=400, ypos=732)
     voice "a_ryo_ind03_002.ogg"
@@ -25878,7 +25877,9 @@ label L_ryo_ind12:
     "一直以来的壁障，现在被踩碎了呢……。"
     jump L_ryo_ind12_ero1
 label L_ryo_ind12_ero1:
-    "cspchar"
+    hide c41
+    hide c42
+    hide c43
     scene bg1026bx0y96 at bgfit
     with dissolve
     show ry0000x263y600 as c41 at Transform(xanchor=0.5, yanchor=0.5, xpos=400, ypos=508)
@@ -57756,7 +57757,9 @@ label L_tmg_ind08:
     "………………………"
     jump L_tmg_ind09
 label L_tmg_ind09:
-    "cspchar"
+    hide c41
+    hide c42
+    hide c43
     scene bg1045b at bgfit
     with dissolve
     play music "bgm/bgm017.ogg"

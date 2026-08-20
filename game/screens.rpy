@@ -769,7 +769,7 @@ screen preferences():
     use game_menu(_("设置"), scroll="viewport"):
 
         vbox:
-            xoffset 55
+            xoffset (15 if renpy.variant("small") else 55)
 
             ## 显示 / 快进
             hbox:
@@ -1503,12 +1503,29 @@ screen quick_menu():
         textbutton _("回退") action Rollback()
         textbutton _("快进") action Skip() alternate Skip(fast=True, confirm=True)
         textbutton _("自动") action Preference("auto-forward", "toggle")
+        textbutton _("跳过") action Skip(fast=True, confirm=True)
         textbutton _("菜单") action ShowMenu()
 
 
 style window:
     variant "small"
-    background "gui/phone/textbox.png"
+    xalign 0.5
+    xfill True
+    yalign gui.textbox_yalign
+    yoffset -20
+    ysize gui.textbox_height
+
+    background Transform("gui/textbox.png", xalign=0.5, yalign=1.0, xsize=648, ysize=gui.textbox_height)
+
+style namebox:
+    variant "small"
+    xpos gui.name_xpos
+    xanchor gui.name_xalign
+    xsize gui.namebox_width
+    ysize gui.namebox_height
+
+    background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
+    padding gui.namebox_borders.padding
 
 style nvl_window:
     variant "small"
